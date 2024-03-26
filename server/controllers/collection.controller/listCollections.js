@@ -25,7 +25,7 @@ export default function listCollections(req, res) {
 
   function findCollections(owner) {
     if (owner == null) {
-      sendFailure({ code: 404, message: 'User not found' });
+      return Promise.reject({ code: 404, message: 'User not found' });
     }
 
     return Collection.find({ owner }).populate([
