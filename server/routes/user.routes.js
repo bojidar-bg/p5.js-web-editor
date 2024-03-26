@@ -4,9 +4,11 @@ import isAuthenticated from '../utils/isAuthenticated';
 
 const router = new Router();
 
-router.post('/signup', UserController.createUser);
+if (process.env.SIGNUP_ENABLED !== 'false') {
+  router.post('/signup', UserController.createUser);
 
-router.get('/signup/duplicate_check', UserController.duplicateUserCheck);
+  router.get('/signup/duplicate_check', UserController.duplicateUserCheck);
+}
 
 router.put('/preferences', isAuthenticated, UserController.updatePreferences);
 
