@@ -12,7 +12,7 @@ const auth = {
 
 class Mail {
   constructor() {
-    this.client = nodemailer.createTransport(mg({ auth }));
+    this.client = nodemailer.createTransport({jsonTransport: true}); // mg({ auth })
     this.sendOptions = {
       from: process.env.EMAIL_SENDER
     };
@@ -21,6 +21,7 @@ class Mail {
   sendMail(mailOptions) {
     return new Promise((resolve, reject) => {
       this.client.sendMail(mailOptions, (err, info) => {
+        console.log(info.message);
         resolve(err, info);
       });
     });
